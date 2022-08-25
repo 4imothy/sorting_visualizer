@@ -1,0 +1,64 @@
+.visualContainer{ 
+    width: 100%;
+    height: 100vh;
+}
+
+/* Top Bar */
+.barContainer{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #a7f2ca;
+}
+
+.customizeSize{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.textContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.sizeText{ 
+    margin: 0;
+    font-size: 3vh;
+}
+
+.textInput{
+    font-size: 3vh;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+}
+
+.textInput::placeholder{
+    color: black;
+    opacity: 1;
+}
+
+.sizeSlider{
+
+}
+
+.arrContainer{ 
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: flex-end;
+    height: 90vh;
+    width: 100%;
+    padding: 0;
+    background-color: #f5ceec;
+}
+
+.arrBlock{
+    background-color: #34cceb;
+    width: 1%;
+}
