@@ -9,11 +9,19 @@ const normalColor = "#34cceb";
 
 let visArr;
 let animSpeed;
+let useArr = [];
+
 export function MergeSort(valArr, visArrP, animSpeedP) {
     visArr = visArrP;
     animSpeed = animSpeedP;
 
-    split(valArr);
+    for(let i = 0; i < valArr.length; i++){
+        useArr.push({val: valArr[i],
+            origInd: i
+        });
+        console.log(useArr[i].val);
+    }
+    split(useArr);
 }
 
 function split(arr) {
@@ -28,17 +36,20 @@ function split(arr) {
     return merge(split(left), split(arr));
 }
 
-function merge(left, right) {
+function merge(left, right) {    
     let arr = [];
 
     while (left.length && right.length) {
-        if (left[0] < right[0])
+        if (left[0].val < right[0].val)
             arr.push(left.shift());
         else
             arr.push(right.shift());
     }
 
     const output = [...arr, ...left, ...right];
-    console.log("o: " + output);
+
+    for(let i =0 ; i < output.length; i++)
+        console.log(output[i].val);
+    
     return output;
 }
