@@ -16,7 +16,7 @@ export function BubbleSort(valArr, visArr, animSpeed) {
             let secondStyle = visArr[j + 1].style;
 
             setTimeout(() => {
-                firstStyle.backgroundColork = comparingColor;
+                firstStyle.backgroundColor = comparingColor;
                 secondStyle.backgroundColor = comparingColor;
             }, timeInc * animSpeed);
             timeInc++;
@@ -38,10 +38,12 @@ export function BubbleSort(valArr, visArr, animSpeed) {
                 firstStyle.backgroundColor = normalColor;
                 secondStyle.backgroundColor = normalColor;
             }, timeInc * animSpeed);
+            
             timeInc++;
         }
-        setTimeout(() => { 
-        visArr[visArr.length - i - 1].style.backgroundColor = sortedColor;
+
+        setTimeout(() => {
+            visArr[visArr.length - i - 1].style.backgroundColor = sortedColor;
         }, timeInc * animSpeed);
         timeInc++;
     }

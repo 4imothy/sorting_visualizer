@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BubbleSort } from '../algorithms/BubbleSort.js';
-import { MergeSort } from '../algorithms/MergeSort.js';
+import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
 import styles from './Visual.module.css';
 
 const MAX_VALUE = 900;
@@ -36,7 +36,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
     }
 
     function callMergeSort(){
-        MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+        InPlaceMergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
 
     return (
