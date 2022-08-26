@@ -38,34 +38,30 @@ function merge(arr, start, mid, end) {
 
     while (start <= mid && start2 <= end) {
 
-        if (arr[start] <= arr[start2]) {
+        let startStyle = visArr[start].style;
+        let start2Style = visArr[start2].style;
 
-            visArr[start].style.backgroundColor = comparingColor;
-            visArr[start2].style.backgroundColor = comparingColor;
-            setTimeout(() => {
-                visArr[start].style.backgroundColor = normalColor;
-                visArr[start2].style.backgroundColor = normalColor;
-            }, timeInc * animSpeed);
-            timeInc++;
-            start++
+        startStyle.backgroundColor = comparingColor;
+        start2Style.backgroundColor = comparingColor;
+
+        setTimeout(() => {
+            startStyle.backgroundColor = normalColor;
+            start2Style.backgroundColor = normalColor;
+        }, animSpeed);
+
+        if (arr[start] <= arr[start2]) {
+            start++;
         } else {
             let tempVal = arr[start2];
-            let start2Style = visArr[start2].style;
-            let startStyle = visArr[start].style;
-            let index = start2;
 
-            //visArr[start].style.backgroundColor = comparingColor;
-            //visArr[start2].style.backgroundColor = comparingColor;
-            // shift the values from start2 over
-            for (index = start2; index !== start; index--) {
+            // shift the values from start2 over to right
+            for (let index = start2; index !== start; index--) {
                 arr[index] = arr[index - 1];
 
                 let indexStyle = visArr[index].style;
                 let indexM1Style = visArr[index - 1].style;
 
                 setTimeout(() => {
-                    startStyle.backgroundColor = normalColor;
-                    start2Style.backgroundColor = normalColor;
                     indexStyle.backgroundColor = movingColor;
                     indexM1Style.backgroundColor = movingColor;
                     let temp = indexStyle.height;
