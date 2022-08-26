@@ -38,7 +38,7 @@ export function BubbleSort(valArr, visArr, animSpeed) {
                 firstStyle.backgroundColor = normalColor;
                 secondStyle.backgroundColor = normalColor;
             }, timeInc * animSpeed);
-            
+
             timeInc++;
         }
 
