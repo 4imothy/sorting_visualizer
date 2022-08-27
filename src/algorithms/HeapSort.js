@@ -62,13 +62,10 @@ export function HeapSort(valArr, visArr, animSpeed) {
             let temp = visArr[0].style.height;
             visArr[0].style.height = visArr[j].style.height;
             visArr[j].style.height = temp;
+            visArr[j].style.backgroundColor = sortedColor;
         }, timeInc * animSpeed);
         timeInc++;
-
         l--;
         heapify(valArr, 0);
     }
-
-    for (let i = 0; i < valArr.length; i++)
-        console.log(valArr[i]);
 }
