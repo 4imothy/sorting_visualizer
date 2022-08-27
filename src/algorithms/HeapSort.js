@@ -1,0 +1,74 @@
+const comparingColor = "#f0d98d";
+const sortedColor = '#6ce66c';
+const normalColor = "#34cceb";
+
+export function HeapSort(valArr, visArr, animSpeed) {
+
+    let l = valArr.length;
+    let timeInc = 0;
+
+    const heapify = (a, i) => {
+        const left = 2 * i + 1;
+        const right = 2 * i + 2;
+
+        let leftBlockStyle;
+        let rightBlockStyle;
+
+        if (left < l)
+            leftBlockStyle = visArr[left].style;
+        if (right < l)
+            rightBlockStyle = visArr[right].style;
+        setTimeout(() => {
+            if (leftBlockStyle != null)
+                leftBlockStyle.backgroundColor = comparingColor;
+            if (rightBlockStyle != null)
+                rightBlockStyle.background = comparingColor;
+        }, timeInc * animSpeed);
+        timeInc++;
+
+        let max = i;
+        if (left < l && a[left] > valArr[max])
+            max = left;
+        if (right < l && a[right] > valArr[max])
+            max = right;
+        if (max !== i) {
+            [a[max], a[i]] = [a[i], a[max]];
+            setTimeout(() => {
+                let maxStyle = visArr[max].style;
+                let iStyle = visArr[i].style;
+                let temp = maxStyle.height;
+                maxStyle.height = iStyle.height;
+                iStyle.height = temp;
+            }, timeInc * animSpeed);
+            timeInc++;
+            heapify(a, max);
+        }
+        setTimeout(() => {
+            if (leftBlockStyle != null)
+                leftBlockStyle.backgroundColor = normalColor;
+            if (rightBlockStyle != null)
+                rightBlockStyle.background = normalColor;
+        }, timeInc * animSpeed);
+        timeInc++;
+    };
+    let i;
+    for (i = Math.floor(l / 2); i >= 0; i--)
+        heapify(valArr, i);
+    for (i = valArr.length - 1; i > 0; i--) {
+        [valArr[0], valArr[i]] = [valArr[i], valArr[0]];
+
+        let j = i;
+        setTimeout(() => {
+            let temp = visArr[0].style.height;
+            visArr[0].style.height = visArr[j].style.height;
+            visArr[j].style.height = temp;
+        }, timeInc * animSpeed);
+        timeInc++;
+
+        l--;
+        heapify(valArr, 0);
+    }
+
+    for (let i = 0; i < valArr.length; i++)
+        console.log(valArr[i]);
+}

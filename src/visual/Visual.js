@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BubbleSort } from '../algorithms/BubbleSort.js';
-import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
+//import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
+import { HeapSort } from '../algorithms/HeapSort.js';
 import { MergeSort } from '../algorithms/MergeSort.js';
 import styles from './Visual.module.css';
 
@@ -35,13 +36,18 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
     function callBubbleSort() {
         BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
-
+    /*
     function callMergeSortInPlace() {
         InPlaceMergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
+    */
 
     function callMergeSort() {
         MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+    }
+
+    function callHeapSort(){
+        HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
 
     return (
@@ -58,6 +64,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                 </div>
             </div>
             <button onClick={callBubbleSort}>Bubble Sort</button>
+            <button onClick={callHeapSort}>Heap Sort</button>
             <button onClick={callMergeSort}>Merge Sort</button>
         </div>
     )
