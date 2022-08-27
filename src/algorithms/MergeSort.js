@@ -29,7 +29,7 @@ function doMerge(mainArray, start, mid, end, auxiliaryArray, animations) {
 
     // -1 to tell reader we at at final stage
     if (end - start + 1 === mainArray.length) {
-        //animations.push(-1);
+        animations.push(-1);
     }
 
     while (i <= mid && j <= end) {
@@ -81,15 +81,13 @@ function animate(animations, visArr, animSpeed) {
     let isFinalMerge = false;
     for (let i = 0; i < animations.length; i++) {
 
-        if (animations[i] === -1) {
-            console.log("is final merge");
-            /*
+        if (animations[i] === -1) {            
             setTimeout(() => {
                 isFinalMerge = true;
             }, i * animSpeed);
-            */
+            
             // array always has values after the minus one
-            i++;
+            animations.splice(i,1);
         }
 
         if (i % 3 === 2) {
@@ -109,8 +107,13 @@ function animate(animations, visArr, animSpeed) {
                 }, i * animSpeed);
             } else {
                 setTimeout(() => {
+                    if(isFinalMerge){
+                    barOneStyle.backgroundColor = sortedColor;
+                    barTwoStyle.backgroundColor = sortedColor;
+                    }else{
                     barOneStyle.backgroundColor = normalColor;
                     barTwoStyle.backgroundColor = normalColor;
+                    }
                 }, i * animSpeed);
             }
         }
