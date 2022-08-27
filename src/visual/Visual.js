@@ -58,7 +58,6 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                 </div>
             </div>
             <button onClick={callBubbleSort}>Bubble Sort</button>
-            <button onClick={callMergeSortInPlace}>Merge Sort In Place</button>
             <button onClick={callMergeSort}>Merge Sort</button>
         </div>
     )

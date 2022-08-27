@@ -1,7 +1,9 @@
+/* As of Now I am not using this algorithm as it causes browser to slow down too much */
 const comparingColor = "#f0d98d"; // yellow
 const movingColor = "#edafcb";   // red
 const sortedColor = "#6ce66c";  // green
 const normalColor = "#34cceb"; // blue
+
 
 let visArr;
 let animSpeed;
@@ -41,8 +43,8 @@ function merge(arr, start, mid, end) {
 
         let startStyle = visArr[start].style;
         let start2Style = visArr[start2].style;
+
         
-        /*
         setTimeout(() => {
             startStyle.backgroundColor = comparingColor;
             start2Style.backgroundColor = comparingColor;
@@ -53,8 +55,7 @@ function merge(arr, start, mid, end) {
             start2Style.backgroundColor = normalColor;
         }, secondTimeInc * animSpeed);
         secondTimeInc++;
-        */
-
+ 
         if (arr[start] <= arr[start2]) {
             start++;
         } else {
