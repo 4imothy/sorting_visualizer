@@ -3,6 +3,7 @@ import { BubbleSort } from '../algorithms/BubbleSort.js';
 //import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
 import { HeapSort } from '../algorithms/HeapSort.js';
 import { MergeSort } from '../algorithms/MergeSort.js';
+import { QuickSort } from '../algorithms/QuickSort.js';
 import styles from './Visual.module.css';
 
 const MAX_VALUE = 900;
@@ -33,14 +34,17 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
         }
     }
 
-    function callBubbleSort() {
-        BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
-    }
+
     /*
     function callMergeSortInPlace() {
         InPlaceMergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
     */
+   
+    function callBubbleSort() {
+        BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+    }
+    
 
     function callMergeSort() {
         MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
@@ -50,6 +54,9 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
         HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
 
+    function callQuickSort(){
+        QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+    }
     return (
         <div className={styles.barContainer}>
             <div className={styles.customizeSize}>
@@ -66,6 +73,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
             <button onClick={callBubbleSort}>Bubble Sort</button>
             <button onClick={callHeapSort}>Heap Sort</button>
             <button onClick={callMergeSort}>Merge Sort</button>
+            <button onClick={callQuickSort}>Quick Sort</button>
         </div>
     )
 }
