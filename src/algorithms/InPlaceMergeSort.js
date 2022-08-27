@@ -6,6 +6,7 @@ const normalColor = "#34cceb"; // blue
 let visArr;
 let animSpeed;
 let timeInc = 0;
+let secondTimeInc = 0;
 
 // have to do the function in-place so we can grab the visual blocks 
 export function InPlaceMergeSort(valArr, visArrP, animSpeedP) {
@@ -40,14 +41,19 @@ function merge(arr, start, mid, end) {
 
         let startStyle = visArr[start].style;
         let start2Style = visArr[start2].style;
-
-        startStyle.backgroundColor = comparingColor;
-        start2Style.backgroundColor = comparingColor;
+        
+        /*
+        setTimeout(() => {
+            startStyle.backgroundColor = comparingColor;
+            start2Style.backgroundColor = comparingColor;
+        }, secondTimeInc * animSpeed);
 
         setTimeout(() => {
             startStyle.backgroundColor = normalColor;
             start2Style.backgroundColor = normalColor;
-        }, animSpeed);
+        }, secondTimeInc * animSpeed);
+        secondTimeInc++;
+        */
 
         if (arr[start] <= arr[start2]) {
             start++;

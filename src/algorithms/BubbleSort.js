@@ -2,7 +2,6 @@
 export function BubbleSort(valArr, visArr, animSpeed) {
 
     const comparingColor = "#f0d98d";
-    const movingColor = "#edafcb";
     const sortedColor = '#6ce66c';
     const normalColor = "#34cceb";
 
@@ -26,8 +25,6 @@ export function BubbleSort(valArr, visArr, animSpeed) {
                     let temp = valArr[j];
                     valArr[j] = valArr[j + 1];
                     valArr[j + 1] = temp;
-                    firstStyle.backgroundColor = movingColor;
-                    secondStyle.backgroundColor = movingColor;
                     temp = firstStyle.height;
                     firstStyle.height = secondStyle.height;
                     secondStyle.height = temp;

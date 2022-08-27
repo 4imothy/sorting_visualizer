@@ -77,7 +77,6 @@ const ArrayShower = ({ arrSize, arr, setArr }) => {
                     return (
                         <div className={styles.arrBlock} key={i} style={{
                             height: `${value / 10}%`,
-
                         }}>
                         </div>
                     )
