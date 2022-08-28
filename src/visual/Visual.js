@@ -15,22 +15,22 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
     const [textInputEvent, setTextInputEvent] = useState();
 
     function handleSlide(e) {
-        setArrSize(Math.round(1.20819 * Math.pow(e.target.value, 1.95891) + 1.00208));
+        setArrSize(e.target.value * 10);
         if (textInputEvent != null)
             textInputEvent.target.value = "";
     }
 
     function handleTextInput(e) {
         setTextInputEvent(e);
-        if (e.target.value <= 10000 && e.target.value >= 0) {
+        if (e.target.value <= 1000 && e.target.value >= 0) {
             setArrSize(e.target.value);
         }
-        if (e.target.value > 10000) {
-            e.target.value = 10000;
+        if (e.target.value > 1000) {
+            e.target.value = 1000;
             setArrSize(e.target.value);
         }
-        if (e.target.value < 0) {
-            e.target.value = 0;
+        if (e.target.value <= 0) {
+            e.target.value = 1;
         }
     }
 
@@ -40,7 +40,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
         InPlaceMergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
     */
-   
+
     function callBubbleSort() {
         BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
