@@ -1,5 +1,3 @@
-import { scryRenderedComponentsWithType } from "react-dom/test-utils";
-
 const comparingColor = "#f0d98d";
 const sortedColor = '#6ce66c';
 const normalColor = "#34cceb";
@@ -30,7 +28,13 @@ export function QuickSort(valArr, visArr, animSpeed) {
 
         let temp;
         for (let j = low; j <= high - 1; j++) {
+            let jStyle = visArr[j].style;
+            let pStyle = visArr[high].style;
 
+            setTimeout(() => { 
+                jStyle.backgroundColor = comparingColor;
+                pStyle.backgroundColor = comparingColor;
+            }, timeInc++ * animSpeed);
             if (arr[j] < pivot) {
                 i++;
                 temp = arr[i];
@@ -43,6 +47,10 @@ export function QuickSort(valArr, visArr, animSpeed) {
                     visArr[j].style.height = tempH;
                 }, timeInc++ * animSpeed);
             }
+            setTimeout(() => { 
+                jStyle.backgroundColor = normalColor;
+                pStyle.backgroundColor = normalColor;
+            }, timeInc++ * animSpeed);
         }
 
         temp = arr[i + 1];

@@ -100,7 +100,7 @@ const ArrayShower = ({ arrSize, arr, setArr }) => {
     )
 }
 const Visual = () => {
-    const [arrSize, setArrSize] = useState(355);
+    const [arrSize, setArrSize] = useState(100);
     const [arr, setArr] = useState([]);
 
     return (
