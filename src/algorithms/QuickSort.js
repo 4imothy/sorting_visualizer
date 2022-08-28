@@ -1,3 +1,5 @@
+import { scryRenderedComponentsWithType } from "react-dom/test-utils";
+
 const comparingColor = "#f0d98d";
 const sortedColor = '#6ce66c';
 const normalColor = "#34cceb";
@@ -8,6 +10,12 @@ export function QuickSort(valArr, visArr, animSpeed) {
     const quickSort = (arr, low, high) => {
         if (low < high) {
             let p = partition(arr, low, high);
+
+            let pStyle = visArr[p].style;
+
+            setTimeout(() => {
+                pStyle.backgroundColor = sortedColor;
+            }, timeInc++ * animSpeed);
 
             quickSort(arr, low, p - 1);
             quickSort(arr, p + 1, high);
@@ -20,44 +28,35 @@ export function QuickSort(valArr, visArr, animSpeed) {
 
         let i = low - 1;
 
+        let temp;
         for (let j = low; j <= high - 1; j++) {
-
-            setTimeout(() => {
-                visArr[j].style.backgroundColor = comparingColor;
-                visArr[high].style.backgroundColor = comparingColor;
-            }, timeInc * animSpeed);
-            timeInc++;
 
             if (arr[j] < pivot) {
                 i++;
-                let temp = arr[i];
+                temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
-
+                let curStyle = visArr[i].style;
                 setTimeout(() => {
-                    let temp = visArr[i].style.height;
-                    visArr[i].style.height = visArr[j].style.height;
-                    visArr[j].style.height = temp;
-                }, timeInc * animSpeed);
-                timeInc++;
+                    let tempH = curStyle.height;
+                    curStyle.height = visArr[j].style.height;
+                    visArr[j].style.height = tempH;
+                }, timeInc++ * animSpeed);
             }
-
-            setTimeout(() => {
-                visArr[j].style.backgroundColor = normalColor;
-                visArr[high].style.backgroundColor = normalColor;
-            },timeInc * animSpeed);
-            timeInc++;
         }
-        let temp = arr[i + 1];
+
+        temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
+        let nextStyle = visArr[i + 1].style;
         setTimeout(() => {
-            let temp = visArr[i + 1].style.height;
-            visArr[i + 1].style.height = visArr[high].style.height;
-            visArr[high].style.height = temp;
-        }, timeInc * animSpeed);
-        timeInc++;
+            let tempH = nextStyle.height;
+            nextStyle.height = visArr[high].style.height;
+            visArr[high].style.height = tempH;
+            visArr[high].style.backgroundColor = sortedColor;
+            visArr[low].style.backgroundColor = sortedColor;
+        }, timeInc++ * animSpeed);
 
         return (i + 1);
     }
