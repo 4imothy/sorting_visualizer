@@ -1,0 +1,17 @@
+.selectAlg-enter{
+    opacity: 0;
+}
+
+.selectAlg-enter-active{
+    opacity: 1;
+    transition: opacity 500ms;
+}
+
+.selectAlg-exit{
+    opacity: 1;
+}
+
+.selectAlg-exit-active{
+    opacity: 0;
+    transition: opacity 500ms;
+}

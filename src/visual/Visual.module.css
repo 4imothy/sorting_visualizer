@@ -47,6 +47,13 @@
 
 }
 
+.selectAlgOpener{
+    display: flex;
+    background-color: green;
+    align-items: center;
+    justify-content: center;
+}
+
 .arrContainer{ 
     display: flex;
     flex-direction: row; 
@@ -61,4 +68,10 @@
 .arrBlock{
     background-color: #34cceb;
     width: 1%;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }

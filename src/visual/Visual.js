@@ -4,7 +4,9 @@ import { BubbleSort } from '../algorithms/BubbleSort.js';
 import { HeapSort } from '../algorithms/HeapSort.js';
 import { MergeSort } from '../algorithms/MergeSort.js';
 import { QuickSort } from '../algorithms/QuickSort.js';
+import { CSSTransition } from 'react-transition-group';
 import styles from './Visual.module.css';
+import './transition.css'
 
 const MAX_VALUE = 900;
 const MIN_VALUE = 1;
@@ -44,17 +46,17 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
     function callBubbleSort() {
         BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
-    
+
 
     function callMergeSort() {
         MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
 
-    function callHeapSort(){
+    function callHeapSort() {
         HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
 
-    function callQuickSort(){
+    function callQuickSort() {
         QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
     }
     return (
@@ -70,11 +72,49 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                     <input defaultValue={16} type="range" step={.5} onChange={handleSlide} />
                 </div>
             </div>
-            <button onClick={callBubbleSort}>Bubble Sort</button>
-            <button onClick={callHeapSort}>Heap Sort</button>
-            <button onClick={callMergeSort}>Merge Sort</button>
-            <button onClick={callQuickSort}>Quick Sort</button>
+            <p>Algorithm: </p>
+            <AlgorithmSelecter />
         </div>
+    )
+}
+
+const AlgorithmSelecter = ({ }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedAlg, setSelectedAlg] = useState('None ▼');
+
+    return (
+        <ul onMouseLeave={() => {
+            setIsOpen(false);
+        }} onMouseOver={() => {
+            setIsOpen(true);
+        }}>
+            <p className={styles.selectAlgOpener}>{selectedAlg}</p>
+            <CSSTransition in={isOpen} timeout={500} classNames="selectAlg" unmountOnExit>
+                <div>
+                    <li>
+                        <button onClick={() => {
+                            setSelectedAlg("Bubble");
+                        }}>Bubble Sort</button>
+                    </li>
+                    <li>
+                        <button onClick={() => {
+                            setSelectedAlg("Heap");
+                        }}>Heap Sort</button>
+                    </li>
+                    <li>
+                        <button onClick={() => {
+                            setSelectedAlg("Merge");
+                        }}>Merge Sort</button>
+                    </li>
+                    <li>
+                        <button onClick={() => {
+                            setSelectedAlg("Quick");
+                        }}>Quick Sort</button>
+                    </li>
+                </div>
+            </CSSTransition>
+        </ul>
     )
 }
 
