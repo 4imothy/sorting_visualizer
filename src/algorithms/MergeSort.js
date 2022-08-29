@@ -1,7 +1,7 @@
 // use that index to access the block on screen and change it
 const comparingColor = "#f0d98d";
-const sortedColor = '#6ce66c';
-const normalColor = "#34cceb";
+const sortedColor = '#529c61';
+const normalColor = "#916d84";
 
 export function MergeSort(array, visArr, animSpeed) {
     const animations = [];

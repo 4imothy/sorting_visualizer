@@ -9,7 +9,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #a7f2ca;
+    background-color: #5d9c9c;
 }
 
 .customizeSize {
@@ -58,6 +58,10 @@
     z-index: 2;
 }
 
+.barButton{
+    font-size: 3vh;
+}
+
 .arrContainer {
     display: flex;
     flex-direction: row;
@@ -66,13 +70,12 @@
     height: 90vh;
     width: 100%;
     padding: 0;
-    background-color: #f5ceec;
-
+    background-color: #41565c;
 }
 
 .arrBlock {
     display: flex;
-    background-color: #34cceb;
+    background-color: #916d84;
     width: 1%;
 }
 

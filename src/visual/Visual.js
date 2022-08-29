@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BubbleSort } from '../algorithms/BubbleSort.js';
 //import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
-import { HeapSort } from '../algorithms/HeapSort.js';
+import { HeapSort, pauseHeapSort } from '../algorithms/HeapSort.js';
 import { MergeSort } from '../algorithms/MergeSort.js';
 import { QuickSort } from '../algorithms/QuickSort.js';
 import { CSSTransition } from 'react-transition-group';
@@ -15,6 +15,8 @@ const TIME_CONST = 200;
 const TopBar = ({ arrSize, setArrSize, valArr }) => {
 
     const [textInputEvent, setTextInputEvent] = useState();
+    const [selectedAlg, setSelectedAlg] = useState("None");
+    const [isSorting, setIsSorting] = useState(false);
 
     function handleSlide(e) {
         setArrSize(e.target.value * 10);
@@ -36,55 +38,79 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
         }
     }
 
-
-    /*
-    function callMergeSortInPlace() {
-        InPlaceMergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+    function sortWithSelected() {
+        setIsSorting(true);
+        switch (selectedAlg) {
+            case "Bubble Sort":
+                BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                break;
+            case "Heap Sort":
+                HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                break;
+            case "Merge Sort":
+                MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                break;
+            case "Quick Sort":
+                QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                break;
+            case "None":
+                return;
+        }
     }
-    */
 
-    function callBubbleSort() {
-        BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+    function pauseSort() {
+        if (isSorting) {
+            switch (selectedAlg) {
+                case "Bubble Sort":
+                    break;
+                case "Heap Sort":
+                    pauseHeapSort(valArr, document.getElementsByClassName(styles.arrBlock));
+                    break;
+                case "Merge Sort":
+                    break;
+                case "Quick Sort":
+                    break;
+                case "None":
+                    return;
+            }
+        }
     }
 
-
-    function callMergeSort() {
-        MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
-    }
-
-    function callHeapSort() {
-        HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
-    }
-
-    function callQuickSort() {
-        QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
-    }
     return (
         <div className={styles.barContainer}>
             <div className={styles.customizeSize}>
                 <div className={styles.textContainer}>
                     <p className={styles.sizeText}>
-                        size:
+                        Size:
                     </p>
-                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} size="3"/>
+                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} size="3" />
                 </div>
                 <div className={styles.sizeSlider}>
-                    <input defaultValue={16} type="range" step={.5} onChange={handleSlide}/>
+                    <input defaultValue={16} type="range" step={.5} onChange={handleSlide} />
                 </div>
             </div>
             <p style={{
                 fontSize: '3vh',
                 marginRight: '1vh'
             }}>Algorithm: </p>
-            <AlgorithmSelecter />
+            <AlgorithmSelecter selectedAlg={selectedAlg} setSelectedAlg={setSelectedAlg} />
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignText: 'center',
+            }}>
+                <button className={styles.barButton} onClick={sortWithSelected}>Sort</button>
+                <button className={styles.barButton} onClick={pauseSort}>Pause Sort</button>
+                <button className={styles.barButton}>New Array</button>
+            </div>
         </div>
     )
 }
 
-const AlgorithmSelecter = ({ }) => {
+const AlgorithmSelecter = ({ selectedAlg, setSelectedAlg }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedAlg, setSelectedAlg] = useState('None');
 
     return (
         <ul onMouseLeave={() => {
@@ -101,7 +127,7 @@ const AlgorithmSelecter = ({ }) => {
                         }}>Bubble Sort</button>
                     </li>
                     <li>
-                        <button className={styles.dropdownItem}  onClick={() => {
+                        <button className={styles.dropdownItem} onClick={() => {
                             setSelectedAlg("Heap Sort");
                         }}>Heap Sort</button>
                     </li>

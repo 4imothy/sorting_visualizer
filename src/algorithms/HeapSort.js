@@ -1,8 +1,23 @@
 const comparingColor = "#f0d98d";
-const sortedColor = '#6ce66c';
-const normalColor = "#34cceb";
+const sortedColor = '#529c61';
+const normalColor = "#916d84";
+
+let storeOrig = [];
+let timeouts = [];
+
+export function pauseHeapSort(valArr, visArr){
+    for(let i =0; i < visArr.length; i++)
+        visArr[i].style.background = normalColor;
+    for(let i = 0; i <timeouts.length; i++)
+        clearTimeout(timeouts[i]);
+    console.log(valArr);
+    valArr = storeOrig;
+}
 
 export function HeapSort(valArr, visArr, animSpeed) {
+
+    for(let i = 0; i < valArr.length; i++)
+        storeOrig[i] = valArr[i];
 
     let l = valArr.length;
     let timeInc = 0;
@@ -18,12 +33,12 @@ export function HeapSort(valArr, visArr, animSpeed) {
             leftBlockStyle = visArr[left].style;
         if (right < l)
             rightBlockStyle = visArr[right].style;
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
             if (leftBlockStyle != null)
                 leftBlockStyle.backgroundColor = comparingColor;
             if (rightBlockStyle != null)
                 rightBlockStyle.background = comparingColor;
-        }, timeInc * animSpeed);
+        }, timeInc * animSpeed));
         timeInc++;
 
         let max = i;
@@ -33,22 +48,22 @@ export function HeapSort(valArr, visArr, animSpeed) {
             max = right;
         if (max !== i) {
             [a[max], a[i]] = [a[i], a[max]];
-            setTimeout(() => {
+            timeouts.push(setTimeout(() => {
                 let maxStyle = visArr[max].style;
                 let iStyle = visArr[i].style;
                 let temp = maxStyle.height;
                 maxStyle.height = iStyle.height;
                 iStyle.height = temp;
-            }, timeInc * animSpeed);
+            }, timeInc * animSpeed));
             timeInc++;
             heapify(a, max);
         }
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
             if (leftBlockStyle != null)
                 leftBlockStyle.backgroundColor = normalColor;
             if (rightBlockStyle != null)
                 rightBlockStyle.background = normalColor;
-        }, timeInc * animSpeed);
+        }, timeInc * animSpeed));
         timeInc++;
     };
     let i;
@@ -58,12 +73,12 @@ export function HeapSort(valArr, visArr, animSpeed) {
         [valArr[0], valArr[i]] = [valArr[i], valArr[0]];
 
         let j = i;
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
             let temp = visArr[0].style.height;
             visArr[0].style.height = visArr[j].style.height;
             visArr[j].style.height = temp;
             visArr[j].style.backgroundColor = sortedColor;
-        }, timeInc * animSpeed);
+        }, timeInc * animSpeed));
         timeInc++;
         l--;
         heapify(valArr, 0);

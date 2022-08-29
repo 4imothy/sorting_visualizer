@@ -1,6 +1,6 @@
 const comparingColor = "#f0d98d";
-const sortedColor = '#6ce66c';
-const normalColor = "#34cceb";
+const sortedColor = '#529c61';
+const normalColor = "#916d84";
 
 export function QuickSort(valArr, visArr, animSpeed) {
     let timeInc = 0;
