@@ -72,7 +72,10 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                     <input defaultValue={16} type="range" step={.5} onChange={handleSlide}/>
                 </div>
             </div>
-            <p>Algorithm: </p>
+            <p style={{
+                fontSize: '3vh',
+                marginRight: '1vh'
+            }}>Algorithm: </p>
             <AlgorithmSelecter />
         </div>
     )
@@ -89,26 +92,26 @@ const AlgorithmSelecter = ({ }) => {
         }} onMouseOver={() => {
             setIsOpen(true);
         }}>
-            <p className={styles.selectAlgOpener}>{selectedAlg}  ▼</p>
+            <span className={styles.selectAlgOpener}>{selectedAlg}  ▼</span>
             <CSSTransition in={isOpen} timeout={500} classNames="selectAlg" unmountOnExit>
                 <div>
                     <li>
-                        <button onClick={() => {
+                        <button className={styles.dropdownItem} onClick={() => {
                             setSelectedAlg("Bubble Sort");
                         }}>Bubble Sort</button>
                     </li>
                     <li>
-                        <button onClick={() => {
+                        <button className={styles.dropdownItem}  onClick={() => {
                             setSelectedAlg("Heap Sort");
                         }}>Heap Sort</button>
                     </li>
                     <li>
-                        <button onClick={() => {
+                        <button className={styles.dropdownItem} onClick={() => {
                             setSelectedAlg("Merge Sort");
                         }}>Merge Sort</button>
                     </li>
                     <li>
-                        <button onClick={() => {
+                        <button className={styles.dropdownItem} onClick={() => {
                             setSelectedAlg("Quick Sort");
                         }}>Quick Sort</button>
                     </li>

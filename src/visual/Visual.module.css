@@ -47,7 +47,15 @@
 
 .selectAlgOpener {
     display: flex;
-    background-color: green;
+    margin-top: 3vh;
+    font-size: 3vh;
+}
+
+.dropdownItem { 
+    font-size: 3vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .arrContainer {
@@ -62,6 +70,7 @@
 }
 
 .arrBlock {
+    display: flex;
     background-color: #34cceb;
     width: 1%;
 }
@@ -70,4 +79,5 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    text-align: center;
 }
