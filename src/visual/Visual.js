@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BubbleSort } from '../algorithms/BubbleSort.js';
 //import { InPlaceMergeSort } from '../algorithms/InPlaceMergeSort.js';
 import { HeapSort, pauseHeapSort } from '../algorithms/HeapSort.js';
-import { MergeSort } from '../algorithms/MergeSort.js';
+import { MergeSort, pauseMergeSort } from '../algorithms/MergeSort.js';
 import { QuickSort } from '../algorithms/QuickSort.js';
 import { CSSTransition } from 'react-transition-group';
 import styles from './Visual.module.css';
@@ -64,9 +64,10 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
                 case "Bubble Sort":
                     break;
                 case "Heap Sort":
-                    pauseHeapSort(setValArr, document.getElementsByClassName(styles.arrBlock));
+                    pauseHeapSort(valArr, setValArr, document.getElementsByClassName(styles.arrBlock));
                     break;
                 case "Merge Sort":
+                    pauseMergeSort(setValArr);
                     break;
                 case "Quick Sort":
                     break;
@@ -101,7 +102,6 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
                 alignText: 'center',
             }}>
                 <button className={styles.barButton} onClick={sortWithSelected}>Sort</button>
-                <button className={styles.barButton} onClick={pauseSort}>Pause Sort</button>
                 <button className={styles.barButton}>New Array</button>
             </div>
         </div>

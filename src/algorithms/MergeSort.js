@@ -3,7 +3,23 @@ const comparingColor = "#f0d98d";
 const sortedColor = '#529c61';
 const normalColor = "#916d84";
 
+let timeouts = [];
+let storeOrig = [];
+
+export function pauseMergeSort(setValArr) {
+    for (let i = 0; i < timeouts.length; i++)
+        clearTimeout(timeouts[i]);
+    setValArr(storeOrig);
+}
+
 export function MergeSort(array, visArr, animSpeed) {
+
+    for (let i = 0; i < visArr.length; i++)
+        visArr[i].style.backgroundColor = normalColor;
+
+    for (let i = 0; i < array.length; i++)
+        storeOrig.push(array[i]);
+
     const animations = [];
     if (array.length <= 1) return array;
     const auxiliaryArray = array.slice();
@@ -81,40 +97,40 @@ function animate(animations, visArr, animSpeed) {
     let isFinalMerge = false;
     for (let i = 0; i < animations.length; i++) {
 
-        if (animations[i] === -1) {            
-            setTimeout(() => {
+        if (animations[i] === -1) {
+            timeouts.push(setTimeout(() => {
                 isFinalMerge = true;
-            }, i * animSpeed);
-            
+            }, i * animSpeed));
+
             // array always has values after the minus one
-            animations.splice(i,1);
+            animations.splice(i, 1);
         }
 
         if (i % 3 === 2) {
-            setTimeout(() => {
+            timeouts.push(setTimeout(() => {
                 const [barOneInd, newVal] = animations[i];
                 const barOneStyle = visArr[barOneInd].style;
                 barOneStyle.height = `${newVal / 10}%`;
-            }, i * animSpeed);
+            }, i * animSpeed));
         } else {
             const [barOneInd, barTwoInd] = animations[i];
             const barOneStyle = visArr[barOneInd].style;
             const barTwoStyle = visArr[barTwoInd].style;
             if (i % 3 === 0) {
-                setTimeout(() => {
+                timeouts.push(setTimeout(() => {
                     barOneStyle.backgroundColor = comparingColor;
                     barTwoStyle.backgroundColor = comparingColor;
-                }, i * animSpeed);
+                }, i * animSpeed));
             } else {
-                setTimeout(() => {
-                    if(isFinalMerge){
-                    barOneStyle.backgroundColor = sortedColor;
-                    barTwoStyle.backgroundColor = sortedColor;
-                    }else{
-                    barOneStyle.backgroundColor = normalColor;
-                    barTwoStyle.backgroundColor = normalColor;
+                timeouts.push(setTimeout(() => {
+                    if (isFinalMerge) {
+                        barOneStyle.backgroundColor = sortedColor;
+                        barTwoStyle.backgroundColor = sortedColor;
+                    } else {
+                        barOneStyle.backgroundColor = normalColor;
+                        barTwoStyle.backgroundColor = normalColor;
                     }
-                }, i * animSpeed);
+                }, i * animSpeed));
             }
         }
     }

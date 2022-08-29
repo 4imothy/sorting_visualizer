@@ -2,22 +2,24 @@ const comparingColor = "#f0d98d";
 const sortedColor = '#529c61';
 const normalColor = "#916d84";
 
-let storeOrig = [];
+let storeCur = [];
 let timeouts = [];
 
-export function pauseHeapSort(setValArr, visArr){
-    for(let i =0; i < visArr.length; i++)
-        visArr[i].style.background = normalColor;
-    for(let i = 0; i <timeouts.length; i++)
+export function pauseHeapSort(valArr, setValArr, visArr) {
+    for (let i = 0; i < timeouts.length; i++) {
         clearTimeout(timeouts[i]);
-    setValArr(storeOrig);
+    }
 
+    for (let i = 0; i < visArr.length; i++) {
+        valArr[i] = (parseInt(visArr[i].style.height.replace(".", "")));
+    }
 }
 
 export function HeapSort(valArr, visArr, animSpeed) {
 
-    for(let i = 0; i < valArr.length; i++)
-        storeOrig[i] = valArr[i];
+    for (let i = 0; i < visArr.length; i++) {
+        visArr[i].style.backgroundColor = normalColor;
+    }
 
     let l = valArr.length;
     let timeInc = 0;
