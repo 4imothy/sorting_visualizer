@@ -12,7 +12,7 @@ const MAX_VALUE = 900;
 const MIN_VALUE = 1;
 const TIME_CONST = 200;
 
-const TopBar = ({ arrSize, setArrSize, valArr }) => {
+const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
 
     const [textInputEvent, setTextInputEvent] = useState();
     const [selectedAlg, setSelectedAlg] = useState("None");
@@ -64,7 +64,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                 case "Bubble Sort":
                     break;
                 case "Heap Sort":
-                    pauseHeapSort(valArr, document.getElementsByClassName(styles.arrBlock));
+                    pauseHeapSort(setValArr, document.getElementsByClassName(styles.arrBlock));
                     break;
                 case "Merge Sort":
                     break;
@@ -174,7 +174,7 @@ const Visual = () => {
 
     return (
         <div className={styles.visualContainer}>
-            <TopBar arrSize={arrSize} setArrSize={setArrSize} valArr={arr} />
+            <TopBar arrSize={arrSize} setArrSize={setArrSize} valArr={arr} setValArr={setArr}/>
             <ArrayShower arr={arr} setArr={setArr} arrSize={arrSize} />
         </div>
     )

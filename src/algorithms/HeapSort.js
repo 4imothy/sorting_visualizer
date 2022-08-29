@@ -5,13 +5,13 @@ const normalColor = "#916d84";
 let storeOrig = [];
 let timeouts = [];
 
-export function pauseHeapSort(valArr, visArr){
+export function pauseHeapSort(setValArr, visArr){
     for(let i =0; i < visArr.length; i++)
         visArr[i].style.background = normalColor;
     for(let i = 0; i <timeouts.length; i++)
         clearTimeout(timeouts[i]);
-    console.log(valArr);
-    valArr = storeOrig;
+    setValArr(storeOrig);
+
 }
 
 export function HeapSort(valArr, visArr, animSpeed) {
