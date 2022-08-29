@@ -111,6 +111,9 @@ function animate(animations, visArr, animSpeed) {
                 const [barOneInd, newVal] = animations[i];
                 const barOneStyle = visArr[barOneInd].style;
                 barOneStyle.height = `${newVal / 10}%`;
+                if (isFinalMerge) {
+                    barOneStyle.backgroundColor = sortedColor;
+                }
             }, i * animSpeed));
         } else {
             const [barOneInd, barTwoInd] = animations[i];
@@ -118,15 +121,15 @@ function animate(animations, visArr, animSpeed) {
             const barTwoStyle = visArr[barTwoInd].style;
             if (i % 3 === 0) {
                 timeouts.push(setTimeout(() => {
-                    barOneStyle.backgroundColor = comparingColor;
+                    if (isFinalMerge)
+                        barOneStyle.backgroundColor = sortedColor;
+                    else
+                        barOneStyle.backgroundColor = comparingColor;
                     barTwoStyle.backgroundColor = comparingColor;
                 }, i * animSpeed));
             } else {
                 timeouts.push(setTimeout(() => {
-                    if (isFinalMerge) {
-                        barOneStyle.backgroundColor = sortedColor;
-                        barTwoStyle.backgroundColor = sortedColor;
-                    } else {
+                    if (!isFinalMerge) {
                         barOneStyle.backgroundColor = normalColor;
                         barTwoStyle.backgroundColor = normalColor;
                     }
