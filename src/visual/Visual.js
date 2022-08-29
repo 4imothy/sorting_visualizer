@@ -66,10 +66,10 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
                     <p className={styles.sizeText}>
                         size:
                     </p>
-                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} />
+                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} size="3"/>
                 </div>
                 <div className={styles.sizeSlider}>
-                    <input defaultValue={16} type="range" step={.5} onChange={handleSlide} />
+                    <input defaultValue={16} type="range" step={.5} onChange={handleSlide}/>
                 </div>
             </div>
             <p>Algorithm: </p>
@@ -81,7 +81,7 @@ const TopBar = ({ arrSize, setArrSize, valArr }) => {
 const AlgorithmSelecter = ({ }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedAlg, setSelectedAlg] = useState('None ▼');
+    const [selectedAlg, setSelectedAlg] = useState('None');
 
     return (
         <ul onMouseLeave={() => {
@@ -89,27 +89,27 @@ const AlgorithmSelecter = ({ }) => {
         }} onMouseOver={() => {
             setIsOpen(true);
         }}>
-            <p className={styles.selectAlgOpener}>{selectedAlg}</p>
+            <p className={styles.selectAlgOpener}>{selectedAlg}  ▼</p>
             <CSSTransition in={isOpen} timeout={500} classNames="selectAlg" unmountOnExit>
                 <div>
                     <li>
                         <button onClick={() => {
-                            setSelectedAlg("Bubble");
+                            setSelectedAlg("Bubble Sort");
                         }}>Bubble Sort</button>
                     </li>
                     <li>
                         <button onClick={() => {
-                            setSelectedAlg("Heap");
+                            setSelectedAlg("Heap Sort");
                         }}>Heap Sort</button>
                     </li>
                     <li>
                         <button onClick={() => {
-                            setSelectedAlg("Merge");
+                            setSelectedAlg("Merge Sort");
                         }}>Merge Sort</button>
                     </li>
                     <li>
                         <button onClick={() => {
-                            setSelectedAlg("Quick");
+                            setSelectedAlg("Quick Sort");
                         }}>Quick Sort</button>
                     </li>
                 </div>
