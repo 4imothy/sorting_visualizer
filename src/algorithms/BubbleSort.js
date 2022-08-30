@@ -5,6 +5,9 @@ export function BubbleSort(valArr, visArr, animSpeed, setIsSorting) {
     const sortedColor = '#529c61';
     const normalColor = "#916d84";
 
+    for (let i = 0; i < visArr.length; i++)
+        visArr[i].style.backgroundColor = normalColor;
+        
     let timeInc = 0;
 
     if (valArr.length <= 1)

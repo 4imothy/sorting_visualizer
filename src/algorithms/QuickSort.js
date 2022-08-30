@@ -5,6 +5,9 @@ const normalColor = "#916d84";
 export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
     let timeInc = 0;
 
+    for (let i = 0; i < visArr.length; i++)
+        visArr[i].style.backgroundColor = normalColor;
+        
     const quickSort = (arr, low, high) => {
         if (low < high) {
             let p = partition(arr, low, high);
@@ -31,7 +34,7 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
             let jStyle = visArr[j].style;
             let pStyle = visArr[high].style;
 
-            setTimeout(() => { 
+            setTimeout(() => {
                 jStyle.backgroundColor = comparingColor;
                 pStyle.backgroundColor = comparingColor;
             }, timeInc++ * animSpeed);
@@ -47,7 +50,7 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
                     visArr[j].style.height = tempH;
                 }, timeInc++ * animSpeed);
             }
-            setTimeout(() => { 
+            setTimeout(() => {
                 jStyle.backgroundColor = normalColor;
                 pStyle.backgroundColor = normalColor;
             }, timeInc++ * animSpeed);
@@ -62,7 +65,6 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
             let tempH = nextStyle.height;
             nextStyle.height = visArr[high].style.height;
             visArr[high].style.height = tempH;
-            visArr[high].style.backgroundColor = sortedColor;
             visArr[low].style.backgroundColor = sortedColor;
         }, timeInc++ * animSpeed);
 
@@ -70,7 +72,8 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
     }
 
     quickSort(valArr, 0, valArr.length - 1);
-   setTimeout(() =>{ 
-    setIsSorting(false);
+
+    setTimeout(() => {
+        setIsSorting(false);
     }, timeInc * animSpeed);
 }
