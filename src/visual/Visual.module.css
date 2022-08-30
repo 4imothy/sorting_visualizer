@@ -52,10 +52,19 @@
     width: 100%;
     position: relative;
     z-index: 2;
+    background-color: #b8ccc5;
+}
+
+.dropdownItem:hover{
+    filter: brightness(90%);
 }
 
 .barButton{
     font-size: 3vh;
+}
+
+.barButton:hover{ 
+    filter: brightness(90%);
 }
 
 .arrContainer {

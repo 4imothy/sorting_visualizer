@@ -11,14 +11,35 @@ import './transition.css'
 const MAX_VALUE = 900;
 const MIN_VALUE = 1;
 const TIME_CONST = 200;
+const DEFAULT_COLOR = "#b8ccc5";
+const WHILE_SORTING = "#b30404";
+const DEFAULT_BAR_BG_COLOR = "#5d9c9c";
+const WHILE_SORTING_BAR_BG_COLOR = "#3a6161";
 
 const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
 
     const [textInputEvent, setTextInputEvent] = useState();
     const [selectedAlg, setSelectedAlg] = useState("None");
     const [isSorting, setIsSorting] = useState(false);
+    const [bgColor, setBGColor] = useState(DEFAULT_COLOR);
+    const [barColor, setBarColor] = useState(DEFAULT_BAR_BG_COLOR);
+
+    useEffect(() => {
+        if (isSorting) {
+            setBGColor(WHILE_SORTING);
+            setBarColor(WHILE_SORTING_BAR_BG_COLOR);
+        }
+        else {
+            setBGColor(DEFAULT_COLOR);
+            setBarColor(DEFAULT_BAR_BG_COLOR)
+        }
+    }, [isSorting]);
 
     function handleSlide(e) {
+        if (isSorting) {
+            e.target.value = arrSize / 10;
+            return;
+        }
         resetBlockColors();
         setArrSize(e.target.value * 10);
         if (textInputEvent != null)
@@ -26,6 +47,11 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
     }
 
     function handleTextInput(e) {
+        if (isSorting) {
+            e.target.value = arrSize;
+            return;
+        }
+
         resetBlockColors();
         setTextInputEvent(e);
         if (e.target.value <= 1000 && e.target.value >= 0) {
@@ -35,8 +61,8 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
             e.target.value = 1000;
             setArrSize(e.target.value);
         }
-        if (e.target.value <= 0) {
-            e.target.value = 1;
+        if (e.target.value < 0) {
+            e.target.value = 0;
         }
     }
 
@@ -56,6 +82,7 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
                 QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize, setIsSorting);
                 break;
             case "None":
+                setIsSorting(false);
                 return;
         }
     }
@@ -86,53 +113,68 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
             arr[i].style.backgroundColor = "#916d84";
     }
 
-    function getNewArray(){
+    function getNewArray() {
+        if(isSorting)
+            return;
+            
         resetBlockColors();
         setValArr(newArray(arrSize));
     }
 
     return (
-        <div className={styles.barContainer}>
+        <div className={styles.barContainer} style={{
+            backgroundColor: `${barColor}`,
+        }}>
             <div className={styles.customizeSize}>
                 <div className={styles.textContainer}>
                     <p className={styles.sizeText}>
                         Size:
                     </p>
-                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} size="3" />
+                    <input className={styles.textInput} type="text" placeholder={arrSize} onChange={handleTextInput} size="3" style={{
+                        backgroundColor: `${bgColor}`,
+                    }} />
                 </div>
-                <div className={styles.sizeSlider}>
-                    <input defaultValue={16} type="range" step={.5} onChange={handleSlide} />
-                </div>
+                <input defaultValue={16} type="range" step={.5} onChange={handleSlide} />
             </div>
             <p style={{
                 fontSize: '3vh',
                 marginRight: '1vh'
             }}>Algorithm: </p>
-            <AlgorithmSelecter selectedAlg={selectedAlg} setSelectedAlg={setSelectedAlg} />
+            <AlgorithmSelecter isSorting={isSorting} bgColor={bgColor} selectedAlg={selectedAlg} setSelectedAlg={setSelectedAlg} />
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 alignText: 'center',
             }}>
-                <button className={styles.barButton} onClick={sortWithSelected}>Sort</button>
-                <button className={styles.barButton} onClick={getNewArray}>New Array</button>
+                <button className={styles.barButton} onClick={sortWithSelected} style={{
+                    backgroundColor: `${bgColor}`,
+                }} >Sort</button>
+                <button className={styles.barButton} onClick={getNewArray} style={{
+                    backgroundColor: `${bgColor}`,
+                }}>New Array</button>
             </div>
         </div>
     )
 }
 
-const AlgorithmSelecter = ({ selectedAlg, setSelectedAlg }) => {
+const AlgorithmSelecter = ({ selectedAlg, setSelectedAlg, bgColor, isSorting }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <ul onMouseLeave={() => {
-            setIsOpen(false);
+        <ul onClick={() => {
+            if (!isSorting)
+                setIsOpen(true);
         }} onMouseOver={() => {
-            setIsOpen(true);
-        }}>
-            <span className={styles.selectAlgOpener}>{selectedAlg}  ▼</span>
+            if (!isSorting)
+                setIsOpen(true);
+        }} onMouseLeave={() => {
+            setIsOpen(false);
+        }} >
+            <span className={styles.selectAlgOpener} style={{
+                backgroundColor: `${bgColor}`,
+            }}>{selectedAlg}  ▼</span>
             <CSSTransition in={isOpen} timeout={500} classNames="selectAlg" unmountOnExit>
                 <div>
                     <li>
