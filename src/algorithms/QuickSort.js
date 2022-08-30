@@ -7,7 +7,7 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
 
     for (let i = 0; i < visArr.length; i++)
         visArr[i].style.backgroundColor = normalColor;
-        
+
     const quickSort = (arr, low, high) => {
         if (low < high) {
             let p = partition(arr, low, high);
@@ -21,6 +21,9 @@ export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
             quickSort(arr, low, p - 1);
             quickSort(arr, p + 1, high);
         }
+        setTimeout(() =>{
+            visArr[low].style.backgroundColor = sortedColor;
+        }, timeInc++ * animSpeed);
     }
 
     const partition = (arr, low, high) => {
