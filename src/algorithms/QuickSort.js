@@ -2,7 +2,7 @@ const comparingColor = "#f0d98d";
 const sortedColor = '#529c61';
 const normalColor = "#916d84";
 
-export function QuickSort(valArr, visArr, animSpeed) {
+export function QuickSort(valArr, visArr, animSpeed, setIsSorting) {
     let timeInc = 0;
 
     const quickSort = (arr, low, high) => {
@@ -70,4 +70,7 @@ export function QuickSort(valArr, visArr, animSpeed) {
     }
 
     quickSort(valArr, 0, valArr.length - 1);
+   setTimeout(() =>{ 
+    setIsSorting(false);
+    }, timeInc * animSpeed);
 }

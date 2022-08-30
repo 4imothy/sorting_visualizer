@@ -44,16 +44,16 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
         setIsSorting(true);
         switch (selectedAlg) {
             case "Bubble Sort":
-                BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                BubbleSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize, setIsSorting);
                 break;
             case "Heap Sort":
-                HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                HeapSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize, setIsSorting);
                 break;
             case "Merge Sort":
-                MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                MergeSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize, setIsSorting);
                 break;
             case "Quick Sort":
-                QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize);
+                QuickSort(valArr, document.getElementsByClassName(styles.arrBlock), TIME_CONST / arrSize, setIsSorting);
                 break;
             case "None":
                 return;

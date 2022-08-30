@@ -15,7 +15,7 @@ export function pauseHeapSort(valArr, setValArr, visArr) {
     }
 }
 
-export function HeapSort(valArr, visArr, animSpeed) {
+export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
 
     for (let i = 0; i < visArr.length; i++) {
         visArr[i].style.backgroundColor = normalColor;
@@ -85,4 +85,7 @@ export function HeapSort(valArr, visArr, animSpeed) {
         l--;
         heapify(valArr, 0);
     }
+    timeouts.push(setTimeout(() =>{ 
+    setIsSorting(false);
+    }, timeInc * animSpeed));
 }

@@ -1,5 +1,5 @@
 // take the arrayBlocks, and the normal array, compare with the normal and then change both
-export function BubbleSort(valArr, visArr, animSpeed) {
+export function BubbleSort(valArr, visArr, animSpeed, setIsSorting) {
 
     const comparingColor = "#f0d98d";
     const sortedColor = '#529c61';
@@ -44,4 +44,8 @@ export function BubbleSort(valArr, visArr, animSpeed) {
         }, timeInc * animSpeed);
         timeInc++;
     }
+
+    setTimeout(() => { 
+        setIsSorting(false);
+    }, timeInc * animSpeed);
 }

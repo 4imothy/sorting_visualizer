@@ -12,7 +12,7 @@ export function pauseMergeSort(setValArr) {
     setValArr(storeOrig);
 }
 
-export function MergeSort(array, visArr, animSpeed) {
+export function MergeSort(array, visArr, animSpeed, setIsSorting) {
 
     for (let i = 0; i < visArr.length; i++)
         visArr[i].style.backgroundColor = normalColor;
@@ -26,6 +26,10 @@ export function MergeSort(array, visArr, animSpeed) {
     mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
 
     animate(animations, visArr, animSpeed);
+
+    timeouts.push(setTimeout(() => {
+        setIsSorting(false);
+    }, (animations.length - 1) * animSpeed));
 }
 
 function mergeSortHelper(mainArray, start, end, auxiliaryArray, animations) {
