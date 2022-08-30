@@ -19,12 +19,14 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
     const [isSorting, setIsSorting] = useState(false);
 
     function handleSlide(e) {
+        resetBlockColors();
         setArrSize(e.target.value * 10);
         if (textInputEvent != null)
             textInputEvent.target.value = "";
     }
 
     function handleTextInput(e) {
+        resetBlockColors();
         setTextInputEvent(e);
         if (e.target.value <= 1000 && e.target.value >= 0) {
             setArrSize(e.target.value);
@@ -77,6 +79,18 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
         }
     }
 
+    function resetBlockColors() {
+        let arr = document.getElementsByClassName(styles.arrBlock);
+
+        for (let i = 0; i < arr.length; i++)
+            arr[i].style.backgroundColor = "#916d84";
+    }
+
+    function getNewArray(){
+        resetBlockColors();
+        setValArr(newArray(arrSize));
+    }
+
     return (
         <div className={styles.barContainer}>
             <div className={styles.customizeSize}>
@@ -102,7 +116,7 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
                 alignText: 'center',
             }}>
                 <button className={styles.barButton} onClick={sortWithSelected}>Sort</button>
-                <button className={styles.barButton}>New Array</button>
+                <button className={styles.barButton} onClick={getNewArray}>New Array</button>
             </div>
         </div>
     )
@@ -174,7 +188,7 @@ const Visual = () => {
 
     return (
         <div className={styles.visualContainer}>
-            <TopBar arrSize={arrSize} setArrSize={setArrSize} valArr={arr} setValArr={setArr}/>
+            <TopBar arrSize={arrSize} setArrSize={setArrSize} valArr={arr} setValArr={setArr} />
             <ArrayShower arr={arr} setArr={setArr} arrSize={arrSize} />
         </div>
     )
