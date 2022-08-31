@@ -40,12 +40,11 @@ export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
             max = right;
         if (max !== i) {
             [a[max], a[i]] = [a[i], a[max]];
+	    let tI = a[i];
+	    let tM = a[max];
             timeouts.push(setTimeout(() => {
-                let maxStyle = visArr[max].style;
-                let iStyle = visArr[i].style;
-                let temp = maxStyle.height;
-                maxStyle.height = iStyle.height;
-                iStyle.height = temp;
+		visArr[i].style.height = `${tI / 10}%`;
+		visArr[max].style.height = `${tM / 10}%`;
             }, timeInc * animSpeed));
             timeInc++;
             heapify(a, max);
@@ -66,10 +65,12 @@ export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
         [valArr[0], valArr[i]] = [valArr[i], valArr[0]];
 
         let j = i;
+	    let tZero = valArr[0];
+	    let tJ = valArr[j];
         timeouts.push(setTimeout(() => {
             let temp = visArr[0].style.height;
-            visArr[0].style.height = visArr[j].style.height;
-            visArr[j].style.height = temp;
+            visArr[0].style.height = `${tZero/ 10}%`; 
+            visArr[j].style.height = `${tJ / 10}%`;
             visArr[j].style.backgroundColor = sortedColor;
         }, timeInc * animSpeed));
         timeInc++;
