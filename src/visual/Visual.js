@@ -67,6 +67,9 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
     }
 
     function sortWithSelected() {
+	    if(isSorting){
+		    return;
+	    }
         setIsSorting(true);
         switch (selectedAlg) {
             case "Bubble Sort":
