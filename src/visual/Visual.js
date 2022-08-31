@@ -68,7 +68,7 @@ const TopBar = ({ arrSize, setArrSize, valArr, setValArr }) => {
 
     function sortWithSelected() {
 	    if(isSorting){
-		    return;
+		return;
 	    }
         setIsSorting(true);
         switch (selectedAlg) {
@@ -210,23 +210,29 @@ const ArrayShower = ({ arrSize, arr, setArr }) => {
 
     useEffect(() => {
         setArr(newArray(arrSize));
-    }, [arrSize, setArr]);
-
-    return (
-        <div className={styles.arrContainer}>
-            {
-                arr.map((value, i) => {
+	visArr = arr.map((value, i) => {
                     return (
                         <div className={styles.arrBlock} key={i} style={{
                             height: `${value / 10}%`,
-                        }}>
-                        </div>
+                        }} />
                     )
                 })
-            }
+    }, [arrSize, setArr]);
+    
+    let visArr = arr.map((value, i) => {
+                    return (
+                        <div className={styles.arrBlock} key={i} style={{
+                            height: `${value / 10}%`,
+                        }} />
+                    )
+                })
+    return (
+        <div className={styles.arrContainer}>
+            {visArr}
         </div>
     )
 }
+
 const Visual = () => {
     const [arrSize, setArrSize] = useState(100);
     const [arr, setArr] = useState([]);
@@ -246,6 +252,5 @@ function newArray(count) {
     }
     return newArr;
 }
-
 
 export default Visual

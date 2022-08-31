@@ -4,23 +4,13 @@ const normalColor = "#916d84";
 
 let storeCur = [];
 let timeouts = [];
-
-export function pauseHeapSort(valArr, setValArr, visArr) {
-    for (let i = 0; i < timeouts.length; i++) {
-        clearTimeout(timeouts[i]);
-    }
-
-    for (let i = 0; i < visArr.length; i++) {
-        valArr[i] = (parseInt(visArr[i].style.height.replace(".", "")));
-    }
-}
+let store = [];
 
 export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
-
+    
     for (let i = 0; i < visArr.length; i++) {
         visArr[i].style.backgroundColor = normalColor;
     }
-
     let l = valArr.length;
     let timeInc = 0;
 
@@ -68,6 +58,7 @@ export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
         }, timeInc * animSpeed));
         timeInc++;
     };
+
     let i;
     for (i = Math.floor(l / 2); i >= 0; i--)
         heapify(valArr, i);
@@ -88,4 +79,14 @@ export function HeapSort(valArr, visArr, animSpeed, setIsSorting) {
     timeouts.push(setTimeout(() =>{ 
     setIsSorting(false);
     }, timeInc * animSpeed));
+}
+
+export function pauseHeapSort(valArr, setValArr, visArr) {
+    for (let i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+    }
+
+    for (let i = 0; i < visArr.length; i++) {
+        valArr[i] = (parseInt(visArr[i].style.height.replace(".", "")));
+    }
 }
