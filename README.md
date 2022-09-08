@@ -1,4 +1,4 @@
-Sorting visualizer built with React, it is hosted [here](https://4tlc.github.io/sorting_visualizer). 
+### Sorting visualizer built with React, it is hosted [here](https://4tlc.github.io/sorting_visualizer). 
 
 The sorter works by having an array which stores numerical values and another array which stores the columns in the document. When a sorting algorithm is called, the value array gets sorted and as that happens the swapped values are being mapped to height swaps of the columns. After each comparison, swapping or placement of a column there is a delay created with setTimeout() so that the sorting can actually be visualized and doesn't happen in real time (which would be too fast to see). 
 
